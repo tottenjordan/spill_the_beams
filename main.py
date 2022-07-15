@@ -21,7 +21,7 @@ VERSION = 'v3'
 # Pipeline Params
 TIMESTAMP = datetime.utcnow().strftime('%y%m%d-%H%M%S')
 JOB_NAME = f'spotify-bq-tfrecords-{VERSION}-{TIMESTAMP}'
-MAX_WORKERS = '1'
+MAX_WORKERS = '10'
 RUNNER = 'DataflowRunner'
 NETWORK = 'ucaip-haystack-vpc-network'
 
@@ -118,7 +118,7 @@ def main():
     ]
     
     pipeline_options = beam.options.pipeline_options.GoogleCloudOptions(pipeline_args)
-    pipeline_options.view_as(SetupOptions).save_main_session = True
+    pipeline_options.view_as(SetupOptions).save_main_session = False #True
     print(pipeline_options)
     
     # Convert rows to tf-example
